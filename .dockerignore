@@ -1,0 +1,29 @@
+# Dependencies
+node_modules
+/npm-debug.log
+yarn-error.log
+
+# Build artifacts and caches
+dist
+build
+.npm
+.cache
+
+# Secrets and environment variables
+.env
+.env.*
+*.key
+*.pem
+.npmrc
+
+# Source control
+.git
+.gitignore
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Docker files
+Dockerfile
+.dockerignore

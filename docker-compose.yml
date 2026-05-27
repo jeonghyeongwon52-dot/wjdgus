@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  chat-app:
+    build: .
+    image: my-chat-app:latest
+    container_name: chat-app-container
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - ADMIN_API_KEY=${ADMIN_API_KEY:-default_secret_key}
+      - REDIS_URL=redis://redis:6379
+    depends_on:
+      - redis
+    restart: always
+    volumes:
+      - ./logs:/app/logs
+
+  redis:
+    image: redis:alpine
+    container_name: redis-container
+    restart: always
+    ports:
+      - "6379:6379"

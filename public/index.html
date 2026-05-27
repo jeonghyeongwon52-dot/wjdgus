@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Socket.io Integrated Chat</title>
+    <style>
+      body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 20px; background-color: #f4f4f9; }
+      .container { max-width: 600px; margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+      #messages { list-style-type: none; padding: 10px; border: 1px solid #ddd; height: 300px; overflow-y: scroll; margin-bottom: 10px; border-radius: 5px; }
+      #messages li { margin-bottom: 8px; padding: 5px; border-bottom: 1px solid #eee; }
+      .controls { display: flex; gap: 10px; margin-bottom: 15px; }
+      input { padding: 8px; border: 1px solid #ddd; border-radius: 4px; flex-grow: 1; }
+      button { padding: 8px 15px; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; }
+      button:hover { background-color: #0056b3; }
+      #typing-indicator { font-size: 0.9em; color: #888; height: 20px; margin-bottom: 5px; }
+      #user-count { font-weight: bold; color: #333; margin-bottom: 15px; }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>실시간 통합 채팅</h1>
+      
+      <div id="user-count">현재 접속자: 0명</div>
+
+      <!-- 닉네임 설정 -->
+      <div class="controls">
+        <input id="nickname-input" placeholder="닉네임 입력" />
+        <button id="set-nickname-btn">닉네임 설정</button>
+      </div>
+
+      <!-- 방 접속 -->
+      <div class="controls">
+        <input id="room-input" placeholder="방 이름 (예: 게임방)" />
+        <button id="join-btn">방 접속</button>
+      </div>
+
+      <!-- 메시지 리스트 -->
+      <ul id="messages"></ul>
+      
+      <!-- 알림 영역 -->
+      <div id="typing-indicator"></div>
+
+      <!-- 메시지 입력 -->
+      <form id="form" class="controls">
+        <input id="input" autocomplete="off" placeholder="메시지를 입력하세요..." />
+        <button>전송</button>
+      </form>
+    </div>
+
+    <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+    <script src="/chat.js"></script>
+  </body>
+</html>

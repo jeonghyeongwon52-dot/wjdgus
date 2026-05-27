@@ -1,0 +1,26 @@
+services:
+  # Web Service for the Chat App
+  - type: web
+    name: chat-app
+    env: node
+    plan: free # Render Free tier
+    buildCommand: npm install && npm install -g pm2
+    startCommand: pm2-runtime ecosystem.config.js --env production
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3000
+      - key: ADMIN_API_KEY
+        generateValue: true # Generates a random API key if not provided
+      - key: REDIS_URL
+        fromService:
+          name: chat-redis
+          type: redis
+          property: connectionString
+
+  # Redis instance for Socket.io scaling
+  - type: redis
+    name: chat-redis
+    plan: free # Render Free tier (check availability in your region)
+    ipAllowList: [] # Only allow internal connections
